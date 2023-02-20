@@ -108,7 +108,6 @@ const sendMessage = () => {
       person: 'user',
       text: userInput.value,
     });
-    emits('changeCurrentTurn');
 
     console.log('Уникальные ответы: ', usedCities);
     console.log('Ответы: ', masAnswers.value);
@@ -117,34 +116,39 @@ const sendMessage = () => {
     lastAnswerLetter.value = userInput.value.slice(-1);
     lastAnswer.value = userInput.value;
     userInput.value = '';
+    emits('changeCurrentTurn', lastAnswer.value, usedCities.size);
   } else {
     console.log('Данный город уже использовали!');
   }
 }
 
-watch(currentTurn, (newNumber, oldNumber) => {
-  if (newNumber === 'computer') {
-    const variants = computerCities.filter((item) => item.slice(0, 1).toLowerCase() === lastAnswerLetter.value.toLowerCase())
+const computerAnswer = () => {
+  const variants = computerCities.filter((item) => item.slice(0, 1).toLowerCase() === lastAnswerLetter.value.toLowerCase())
 
-    console.log('variants: ', variants);
+  console.log('variants: ', variants);
 
-    if (variants.length !== 0) {
-      for (let i = 0; i < variants.length; i++) {
-        if (!usedCities.has(variants[i])) {
-          usedCities.add(variants[i]);
-          masAnswers.value.push({
-            person: 'computer',
-            text: variants[i],
-          });
-          lastAnswerLetter.value = variants[i].slice(-1);
-          emits('changeCurrentTurn', lastAnswer.value, usedCities.size);
-          break;
-        }
+  if (variants.length !== 0) {
+    for (let i = 0; i < variants.length; i++) {
+      if (!usedCities.has(variants[i])) {
+        usedCities.add(variants[i]);
+        masAnswers.value.push({
+          person: 'computer',
+          text: variants[i],
+        });
+        lastAnswer.value = variants[i];
+        lastAnswerLetter.value = variants[i].slice(-1);
+        emits('changeCurrentTurn', lastAnswer.value, usedCities.size);
+        break;
       }
     }
-    
   }
-});
+}
+
+function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const inputPlaceholder = computed(() => {
   if (!isQuizStarted.value)  {
@@ -157,6 +161,16 @@ const inputPlaceholder = computed(() => {
     return `Знаете город на букву “${lastAnswerLetter.value.toUpperCase()}”?`;
   }
 })
+
+watch(currentTurn, (newNumber, oldNumber) => {
+  if (newNumber === 'computer') {
+    let randomTime = getRandomInt(10, 12) * 1000;
+    console.log('randomTimer: ', randomTime);
+    setTimeout(() => {
+      computerAnswer();
+    }, randomTime)
+  }
+});
 
 </script>
 
