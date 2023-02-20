@@ -1,8 +1,11 @@
 <template>
   <div class="card-body text-base leading-normal text-zinc-700 p-6">
     <div class="card-body__content">
-      <div class="overflow-y-auto h-[384px] no-scrollbar">
-        <div class="card-body__text text-sm text-zinc-400 text-center leading-[384px]" v-if="!isQuizStarted">Первый
+      <div 
+        class="overflow-y-auto h-[384px] no-scrollbar"
+        :class="!isQuizStarted ? 'flex justify-center items-center' : ''"
+        >
+        <div class="card-body__text text-sm text-zinc-400 text-center" v-if="!isQuizStarted">Первый
           участник вспоминает города...
         </div>
 
@@ -17,46 +20,53 @@
 
       <div class="card-body__input relative mt-4">
         <form action="" method="POST" @submit.prevent="sendMessage">
-          <input class="
-                  card-body__input-text
-                  inline-block
-                  w-full
-                  p-3
-                  pr-[55px]
-                  rounded-2xl
-                bg-gray-50
-                  appearance-none
-                  focus:outline-none
-                  focus:ring
-                focus:border-blue-300" v-model="userInput"
+          <input 
+            class="
+              card-body__input-text
+              inline-block
+              w-full
+              p-3
+              sm:pr-[55px]
+              text-[10px]
+              sm:text-sm
+              rounded-2xl
+            bg-gray-50
+              appearance-none
+              focus:outline-none
+              focus:ring
+            focus:border-blue-300" 
+            v-model="userInput"
             :placeholder="inputPlaceholder"
             :class="currentTurn === 'computer' ? 'text-zinc-400' : 'text-zinc-700'" type="text"
             :disabled="currentTurn === 'computer'">
           <button 
             class="
-                  card-body__input-icon
-                  absolute
-                  z-10
-                  top-2
-                  right-2
-                  w-8
-                  h-8
-                  bg-send-answer
-                  bg-[length:20px_20px]
-                  bg-center
-                  bg-no-repeat
-                  rounded-md
-                  appearance-none
-                  focus:outline-none
-                  focus:ring
-                focus:border-blue-300
-                  text-[0px]
-                  truncate" 
+              card-body__input-icon
+              hidden
+              sm:block
+              absolute
+              z-10
+              top-2
+              right-2
+              w-8
+              h-8
+              bg-send-answer
+              bg-[length:20px_20px]
+              bg-center
+              bg-no-repeat
+              rounded-md
+              appearance-none
+              focus:outline-none
+              focus:ring
+            focus:border-blue-300
+              text-[0px]
+              truncate" 
             :class="currentTurn === 'computer' ? 'bg-zinc-400' : 'bg-violet-500'"
             type="submit"
             :disabled="currentTurn === 'computer'"
             aria-label="Ответить"
           >Ответить</button>
+          <button class="card-body__mobile-button sm:hidden block w-full bg-violet-600 text-white rounded px-4 py-2 mt-3" type="submit">Ответить</button>
         </form>
       </div>
 
