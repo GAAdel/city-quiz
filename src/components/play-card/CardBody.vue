@@ -105,10 +105,8 @@ const masAnswers = ref([] as IGameAnswers[]);
 const usedCities = new Set();
 
 const sendMessage = () => {
-  // console.log('Ввели: ', userInput.value);
   if (!isQuizStarted.value) {
   } else if (userInput.value.slice(0, 1).toLowerCase() !== lastAnswerLetter.value) {
-    console.log('Некорректный ввод!');
     return
   }
 
@@ -119,23 +117,18 @@ const sendMessage = () => {
       text: userInput.value,
     });
 
-    console.log('Уникальные ответы: ', usedCities);
-    console.log('Ответы: ', masAnswers.value);
-
     isQuizStarted.value = true;
     lastAnswerLetter.value = userInput.value.slice(-1);
     lastAnswer.value = userInput.value;
     userInput.value = '';
     emits('changeCurrentTurn', lastAnswer.value, usedCities.size);
   } else {
-    console.log('Данный город уже использовали!');
+    return;
   }
 }
 
 const computerAnswer = () => {
   const variants = computerCities.filter((item) => item.slice(0, 1).toLowerCase() === lastAnswerLetter.value.toLowerCase())
-
-  console.log('variants: ', variants);
 
   if (variants.length !== 0) {
     for (let i = 0; i < variants.length; i++) {
@@ -175,13 +168,9 @@ const inputPlaceholder = computed(() => {
 watch(currentTurn, (newNumber, oldNumber) => {
   if (newNumber === 'computer') {
     let randomTime = getRandomInt(10, 12) * 1000;
-    console.log('randomTimer: ', randomTime);
     setTimeout(() => {
       computerAnswer();
     }, randomTime)
   }
 });
-
 </script>
-
-<style scoped></style>

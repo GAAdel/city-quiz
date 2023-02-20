@@ -20,7 +20,7 @@ const router = useRouter();
 
 const isQuizFinished = ref(false);
 
-const timerTime = 120000; // 2минуты = 120000; 15 сек = 15000
+const timerTime = 120000; // 120000; 15000
 
 let deadline = new Date().getTime() + timerTime;
 const timer = ref();
@@ -60,9 +60,8 @@ onBeforeUnmount(() => {
 })();
 
 const currentTurn = ref('user' as 'user' | 'computer');
-
-const lastCity = ref(' '); // ToDo
-const amount = ref(0); // ToDo
+const lastCity = ref(' ');
+const amount = ref(0);
 
 const changeCurrentTurn = (lastAnswer: string, amountAnswers: number) => {
   lastCity.value = lastAnswer;
@@ -82,5 +81,4 @@ watch(isQuizFinished, (newIsQuizFinished) => {
     router.push({ name: 'final', params: { looser: `${currentTurn.value}`, lastCity: lastCity.value, amount: amount.value } })
   }
 });
-
 </script>

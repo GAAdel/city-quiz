@@ -19,9 +19,4 @@ const props = defineProps({
     type: Number,
   }
 });
-
 </script>
-
-<style scoped>
-
-</style>

@@ -24,7 +24,4 @@ const router = useRouter();
 const handleClick = () => {
   router.push('/play');
 }
-
 </script>
-
-<style scoped></style>

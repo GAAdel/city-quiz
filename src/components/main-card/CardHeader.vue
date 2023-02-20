@@ -3,11 +3,3 @@
     <h1 class="card-header__title text-base text-black">Игра в города на время</h1>
   </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped>
-
-</style>
