@@ -1,5 +1,6 @@
 <template>
-  <div class="container max-w-xl">
+  <div 
+    class="h-screen flex justify-center items-center">
     <slot />
   </div>
 </template>
