@@ -1,13 +1,11 @@
 <template>
-  <main>
-    <AppCard>
-      <CardHeader :timer="timer" :timerPercentage="timerPercentage"/>
-      <CardBody 
-        :currentTurn="currentTurn"
-        @changeCurrentTurn="changeCurrentTurn"
-      />
-    </AppCard>
-  </main>
+  <AppCard>
+    <CardHeader :timer="timer" :timerPercentage="timerPercentage"/>
+    <CardBody 
+      :currentTurn="currentTurn"
+      @changeCurrentTurn="changeCurrentTurn"
+    />
+  </AppCard>
 </template>
 
 <script setup lang="ts">
@@ -22,7 +20,7 @@ const router = useRouter();
 
 const isQuizFinished = ref(false);
 
-const timerTime = 15000; // 2минуты = 120000; 15 сек = 15000
+const timerTime = 120000; // 2минуты = 120000; 15 сек = 15000
 
 let deadline = new Date().getTime() + timerTime;
 const timer = ref();

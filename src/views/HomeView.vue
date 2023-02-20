@@ -1,10 +1,8 @@
 <template>
-  <main>
-    <AppCard>
-      <CardHeader />
-      <CardBody />
-    </AppCard>
-  </main>
+  <AppCard>
+    <CardHeader />
+    <CardBody />
+  </AppCard>
 </template>
 
 <script setup lang="ts">
