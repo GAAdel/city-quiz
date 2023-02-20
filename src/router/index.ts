@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('../views/PlayView.vue')
     },
     {
-      path: '/final/:winner/:lastCity/:amount',
+      path: '/final/:looser/:lastCity/:amount',
       name: 'final',
       component: () => import('../views/FinalView.vue')
     }
