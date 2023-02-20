@@ -1,7 +1,7 @@
 <template>
   <main>
     <AppCard>
-      <CardHeader :timer="timer" />
+      <CardHeader :timer="timer" :timerPercentage="timerPercentage"/>
       <CardBody 
         :currentTurn="currentTurn"
         @changeCurrentTurn="changeCurrentTurn"
@@ -22,9 +22,11 @@ const router = useRouter();
 
 const isQuizFinished = ref(false);
 
-let deadline = new Date().getTime() + 120000;
+const timerTime = 15000; // 2минуты = 120000; 15 сек = 15000
+
+let deadline = new Date().getTime() + timerTime;
 const timer = ref();
-// const timerPercentage = ref();
+const timerPercentage = ref();
 
 const updateTimer = () => {
   const date = new Date().getTime();
@@ -42,7 +44,7 @@ const updateTimer = () => {
   }
 
   timer.value = `${fMinutes}:${fSeconds}`;
-  // timerPercentage.value = 100 * timeRemaining / 120000;
+  timerPercentage.value = 100 - Math.floor((timeRemaining * 1000) * 100 / timerTime);
 }
 
 let currentTimer;
@@ -67,7 +69,7 @@ const amount = ref(0); // ToDo
 const changeCurrentTurn = (lastAnswer: string, amountAnswers: number) => {
   lastCity.value = lastAnswer;
   amount.value = amountAnswers;
-  deadline = new Date().getTime() + 120000;
+  deadline = new Date().getTime() + timerTime;
   clearInterval(currentTimer);
   startTimer();
   if (currentTurn.value === 'user') {
@@ -77,9 +79,9 @@ const changeCurrentTurn = (lastAnswer: string, amountAnswers: number) => {
   }
 }
 
-watch(isQuizFinished, (newNumber, oldNumber) => {
-  if (newNumber === true) {
-    router.push({ name: 'final', params: { winner: `${currentTurn.value}`, lastCity: lastCity.value, amount: amount.value } })
+watch(isQuizFinished, (newIsQuizFinished) => {
+  if (newIsQuizFinished === true) {
+    router.push({ name: 'final', params: { looser: `${currentTurn.value}`, lastCity: lastCity.value, amount: amount.value } })
   }
 });
 

@@ -4,7 +4,7 @@
     <span class="card-header__timer text-xl" v-if="timer">{{ timer }}</span>
   </div>
   <div class="w-full bg-gray-200 h-[5px]">
-    <div class="bg-violet-300 h-[5px]" style="width: 70%"></div>
+    <div class="bg-violet-300 h-[5px]" v-if="timerPercentage" :style="{width: `${timerPercentage}%`}"></div>
   </div>
 </template>
 

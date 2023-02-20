@@ -2,7 +2,7 @@
   <div class="card-body text-xl leading-normal text-center px-20 py-10">
     <div 
       class="card-body__text leading-normal mb-8"
-      v-if="route.params.winner === 'computer'"
+      v-if="route.params.looser === 'user'"
     >К сожалению твое время вышло! <br> Твой противник победил!</div>
 
      <div 
@@ -12,7 +12,7 @@
     
     <div 
       class="card-body__text text-3xl leading-normal mb-8"
-      :class="route.params.winner === 'computer' ? 'text-red-600' : 'text-green-600'"
+      :class="route.params.looser === 'user' ? 'text-red-600' : 'text-green-600'"
     >00:00</div>
 
     <div class="card-body__text leading-normal mb-8">Всего было перечислено городов: {{ route.params.amount }} <br> Очень не плохой результат!</div>
