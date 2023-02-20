@@ -1,13 +1,12 @@
 <template>
   <div
     class="
-    card w-[576px]
-    absolute
-    top-1/2
-    left-1/2
-    -translate-x-2/4
-    -translate-y-2/4
-    flex flex-col 
+    card
+    w-[330px]
+    sm:w-[576px]
+    md:w-[576px]
+    flex
+    flex-col 
     bg-white
     rounded-2xl">
 
