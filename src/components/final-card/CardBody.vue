@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body text-xl leading-normal text-center px-20 py-10">
+  <div class="card-body text-xl leading-normal text-center px-3 sm:px-20 py-10">
     <div 
       class="card-body__text leading-normal mb-8"
       v-if="route.params.looser === 'user'"
