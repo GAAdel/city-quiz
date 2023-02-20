@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen bg-gray-200">
     <AppContainer>
       <RouterView />
     </AppContainer>
@@ -8,14 +8,5 @@
 
 <script setup lang="ts">
 import AppContainer from '@/components/AppContainer.vue';
-
 import { RouterView } from 'vue-router';
-
 </script>
-
-<style>
-body {
-  background-color: #E5E7EB;
-}
-
-</style>

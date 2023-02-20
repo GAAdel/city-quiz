@@ -10,15 +10,17 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        sm: "2rem",
-        lg: "4rem",
-        xl: "5rem",
-        "2xl": "6rem",
+        DEFAULT: "0px",
+        sm: "40px",
+        lg: "60px",
       },
     },
     fontFamily: {
       sans: ["Helvetica Neue", "sans-serif"],
+    },
+    screens: {
+      sm: "576px",
+      md: "768px",
     },
   },
   plugins: [require("@tailwindcss/typography")],
